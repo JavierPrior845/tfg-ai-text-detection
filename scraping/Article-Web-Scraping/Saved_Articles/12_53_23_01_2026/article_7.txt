@@ -1,0 +1,17 @@
+Title: Scarlett Johansson and Cate Blanchett back campaign accusing AI firms of theft
+
+
+
+
+Hundreds of writers, musicians and performers urge licensing deals instead of scraping creative work
+Scarlett Johansson, Cate Blanchett, REM and Jodi Picoult are among hundreds of Hollywood stars, musicians and authors backing a new campaign accusing AI companies of “theft” of their work.
+The “Stealing Isn’t Innovation” drive launched on Thursday with the support of approximately 800 creative professionals and bands. The campaign includes a statement accusing tech firms of using American creators’ work to “build AI platforms without authorisation or regard for copyright law”.
+It adds: “Artists, writers, and creators of all kinds are banding together with a simple message: Stealing our work is not innovation. It’s not progress. It’s theft – plain and simple.”
+The statement urges AI companies to pursue licensing deals and partnerships with the creative industries and acknowledges firms that have taken that route. OpenAI, the developer of ChatGPT, has signed deals with content owners including Disney and the Guardian, while Warner Music Group has struck a licensing deal with AI music generator Suno.
+However, copyright remains one of the most contentious issues within AI, because the models that power chatbots like ChatGPT or image generators like Grok Imagine rely on vast amounts of data taken from the open web in order to help create their responses. Creative professionals argue that tech firms should seek their permission before using such material – and that they should receive a payment if they give their consent.
+OpenAI, and other AI firms, have argued that using material available online is “fair use”, a US legal doctrine that allows use of copyright-protected work without the owner’s permission in certain circumstances. As of last year, dozens of lawsuits had been launched in the US over the AI and copyright issue.
+Johansson was dragged into the AI debate in 2024 after OpenAI’s voice assistant used her vocal likeness, prompting the actor say she was “shocked, angered and in disbelief” by the move. OpenAI subsequently removed the voice from ChatGPT.
+Other signatories to the statement include actor Joseph Gordon-Levitt, Breaking Bad creator Vince Gilligan and singer Cyndi Lauper. Last year Gilligan described AI as the “world’s most expensive and energy-intensive plagiarism machine”.
+The “Stealing Isn’t Innovation” push has been organised by the Human Artistry Campaign, whose backers include the Writers Guild of America, the Recording Industry Association of America and the actors’ trade union SAG-AFTRA, which went on strike in 2023, partly over the use of AI.
+In the UK, the government has been under fire for proposing that AI firms should be allowed to use copyright-protected work without first seeking artists’ permission, unless they signal that they wish to “opt out” of the process. The technology secretary, Liz Kendall, said this month that the government was seeking a “reset” on these plans via an official review due to be published in March.
+​

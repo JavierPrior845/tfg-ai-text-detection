@@ -1,0 +1,38 @@
+Title: Experts warn of threat to democracy from ‘AI bot swarms’ infesting social media
+
+
+
+
+Misinformation technology could be deployed at scale to disrupt 2028 US presidential election, AI researchers say
+Political leaders could soon launch swarms of human-imitating AI agents to reshape public opinion in a way that threatens to undermine democracy, a high profile group of experts in AI and online misinformation has warned.
+The Nobel peace prize-winning free-speech activist Maria Ressa, and leading AI and social science researchers from Berkeley, Harvard, Oxford, Cambridge and Yale are among a global consortium flagging the new “disruptive threat” posed by hard-to-detect, malicious “AI swarms” infesting social media and messaging channels.
+A would-be autocrat could use such swarms to persuade populations to accept cancelled elections or overturn results, they said, amid predictions the technology could be deployed at scale by the time of the US presidential election in 2028.
+The warnings, published today in Science, come alongside calls for coordinated global action to counter the risk, including “swarm scanners” and watermarked content to counter AI-run misinformation campaigns. Early versions of AI-powered influence operations have been used in the 2024 elections in Taiwan, India and Indonesia.
+“A disruptive threat is emerging: swarms of collaborative, malicious AI agents,” the authors said. “These systems are capable of coordinating autonomously, infiltrating communities and fabricating consensus efficiently. By adaptively mimicking human social dynamics, they threaten democracy.”
+One leading expert in propaganda technology, Inga Trauthig, said the adoption of such advanced technology is likely to be slowed by politicians’ reluctance to cede campaign control to AIs. Another cause for skepticism is concern that using such illicit techniques would not be worth the risk, given voters are still more influenced by offline material.
+The experts behind the warning include New York University’s Gary Marcus, a prominent sceptic about the claimed potential of current AI models who calls himself a “generative AI realist”, and Audrey Tang, Taiwan’s first digital minister, who has warned: “Those in the pay of authoritarian forces are undermining electoral processes, weaponizing AI and employing our societal strengths against us.”
+Others include David Garcia, professor for social and behavioural data science at the University of Konstanz, Sander van der Linden, a misinformation expert and director of Cambridge University’s social decision-making lab, and Christopher Summerfield, AI researcher and professor of cognitive neuroscience at Oxford University.
+Together they say political leaders could deploy almost limitless numbers of AIs to masquerade as humans online and precisely infiltrate communities, learn their foibles over time and use increasingly convincing and carefully tailored falsehoods, to change population-wide opinions.
+The threat is being supercharged by advances in AIs’ ability to pick up on the tone and content of discourse. They are increasingly able to mimic human dynamics, for example, by using appropriate slang and posting irregularly to avoid detection. Progress in the development of “agentic” AI also means the ability to autonomously plan and coordinate action.
+As well as operating across social media, they may use messaging channels and even write blogs or use email, depending on which channel the AI thinks best helps achieve an aim, said one of the authors, Daniel Thilo Schroeder, a research scientist at the Sintef research institute in Oslo.
+“It’s just frightening how easy these things are to vibe code and just have small bot armies that can actually navigate online social media platforms and email and use these tools,” said Schroeder, who has been simulating swarms in laboratory conditions.
+Another of the authors, Jonas Kunst, professor of communication at the BI Norwegian Business School, said: “If these bots start to evolve into a collective and exchange information to solve a problem – in this case a malicious goal, namely analysing a community and finding a weak spot – then coordination will increase their accuracy and efficiency.
+“That is a really serious threat that we predict is going to materialise.”
+In Taiwan, where voters are regularly targeted by Chinese propaganda, often unknowingly, AI bots have been increasing engagement with citizens on Threads and Facebook in the last two to three months, said Puma Shen, a Taiwanese Democratic Progressive Party MP and campaigner against Chinese disinformation.
+During discussions on political topics the AIs tend to provide “tonnes of information that you cannot verify”, creating “information overload”, Shen said. He said AIs might cite fake articles about how America will abandon Taiwan. Another recent trend is for the AI bots to stress to younger Taiwanese people that the China-Taiwan dispute is very complicated “so do not take sides if you have no knowledge”.
+“It’s not telling you that China’s great, but it’s [encouraging them] to be neutral,” Shen told the Guardian. “This is very dangerous, because then you think people like me are radical.”
+Amid signs the progress of AI technology is not as rapid as Silicon Valley companies like OpenAI and Anthropic have claimed, the Guardian asked independent AI experts to assess the swarm warnings.
+“In the election-heavy year of 2024 the capabilities were there for AI-driven microtargeting but we didn’t see as much of that as scholars predicted,” said Trauthig, an adviser to the International Panel on the Information Environment. “Most political propagandists I interview are still using older technologies and are not at this cutting edge.”
+“It isn’t fanciful,” said Michael Wooldridge, professor of the foundations of AI at Oxford University. “I think it is entirely plausible that bad actors will try to mobilise virtual armies of LLM-powered agents to disrupt elections and manipulate public opinion, for example targeting large numbers of individuals on social media and other electronic media. It’s technologically perfectly feasible … the technology has got progressively better and much more accessible.”
+
+The best public interest journalism relies on first-hand accounts from people in the know.
+
+If you have something to share on this subject, you can contact us confidentially using the following methods.
+Secure Messaging in the Guardian app
+The Guardian app has a tool to send tips about stories. Messages are end to end encrypted and concealed within the routine activity that every Guardian mobile app performs. This prevents an observer from knowing that you are communicating with us at all, let alone what is being said.
+
+If you don't already have the Guardian app, download it (iOS/Android) and go to the menu. Select ‘Secure Messaging’. 
+SecureDrop, instant messengers, email, telephone and post
+If you can safely use the Tor network without being observed or monitored, you can send messages and documents to the Guardian via our SecureDrop platform.
+
+Finally, our guide at theguardian.com/tips lists several ways to contact us securely, and discusses the pros and cons of each. 
