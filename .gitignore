@@ -1,0 +1,10 @@
+.env
+__pycache__/
+venv/
+.DS_Store
+*.jsonl
+*.json
+*.csv
+.env
+venv/
+doc.md
