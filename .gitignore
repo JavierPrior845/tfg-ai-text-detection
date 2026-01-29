@@ -5,4 +5,4 @@ venv/
 *.jsonl
 .env
 venv/
-doc.txt
+doc.md

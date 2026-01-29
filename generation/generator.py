@@ -1,25 +1,23 @@
 import os
-import json
 from dotenv import load_dotenv
 from google import genai
+from google.genai import types
 from pydantic import BaseModel
 
 load_dotenv()
 
-# Definimos el contrato de datos
 class SyntheticNews(BaseModel):
     headline: str
     content: str
     technique: str
 
 def run_generation(real_headline: str):
-    # Inicializamos el nuevo cliente
     client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-    
+
     prompt = f"""
-    Eres un redactor de noticias experto. 
+    Eres un redactor de noticias experto.
     Crea una noticia sintética basada en este titular real: "{real_headline}"
-    
+
     REGLAS:
     1. Estilo profesional y neutral (Castellano de España).
     2. Manipulación sutil de los hechos.
@@ -27,17 +25,17 @@ def run_generation(real_headline: str):
     """
 
     try:
-        # En el nuevo SDK, se usa models.generate
         response = client.models.generate_content(
-            model='gemini-2.0-flash-lite', # Usamos la última versión disponible en 2026
-            contents='que es un prompt',
-            config={
-                'response_mime_type': 'application/json',
-            }
+            model="gemini-2.5-flash-lite",  # o el modelo que tengas habilitado
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json",
+                response_schema=SyntheticNews,  # <- usa tu Pydantic
+                max_output_tokens=512,
+            ),
         )
 
-        # Acceso directo al objeto parseado
-        data = response.parsed
+        data: SyntheticNews = response.parsed  # ya tipado
         print("\n--- NOTICIA GENERADA CON ÉXITO ---")
         print(f"Titular: {data.headline}")
         print(f"Técnica: {data.technique}")
