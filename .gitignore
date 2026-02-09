@@ -9,3 +9,5 @@ venv/
 venv/
 doc.md
 assets/*
+dataset/
+last_token.txt

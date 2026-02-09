@@ -18,10 +18,11 @@ class SyntheticNews(BaseModel):
 
 # 1. Obtiene la carpeta donde está ESTE script
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATASET_ROOT = os.path.join(BASE_DIR, "dataset")
 REAL_NEWS_FILE = os.path.join(BASE_DIR, "..", "scraping", "data_collection", "real_news.jsonl")
 REAL_NEWS_FILE = os.path.normpath(REAL_NEWS_FILE)
-FINAL_DATASET_FILE = "multimodal_dataset.jsonl"
-IMAGES_DIR = "dataset"
+FINAL_DATASET_FILE = os.path.join(DATASET_ROOT, "multimodal_dataset.jsonl")
+IMAGES_DIR = os.path.join(DATASET_ROOT, "images")
 os.makedirs(IMAGES_DIR, exist_ok=True)
 
 class DatasetGenerator:
