@@ -51,7 +51,8 @@ def process_automated_ingestion(goal_new_articles=100):
                 "apikey": os.getenv("NEWSDATA_API_KEY"),
                 "language": "en",
                 "size": 10,
-                "category": cat
+                "category": cat,
+                "removeduplicate": 1
             }
             if next_page_token:
                 params["page"] = next_page_token

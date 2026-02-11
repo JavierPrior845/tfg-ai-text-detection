@@ -41,19 +41,20 @@ class DatasetGenerator:
             return {json.loads(line)["group_id"] for line in f}
 
     def generate_fake_text(self, real_title, real_content):
-        """Genera contenido sintético en INGLÉS mediante parafraseo."""
+        
+        target_words = len(real_content.split())
         prompt = f"""
-        You are an expert news editor. Based on the following REAL news, create a FAKE version using PARAPHRASING and subtle data manipulation.
+            [CRITICAL INSTRUCTION]
+            You must paraphrase the following news article. 
+            The generated content MUST HAVE between {int(target_words*0.9)} and {int(target_words*1.1)} words.
+            Do not be concise. Mimic the original news length and detail density.
+
+            REAL TITULAR: {real_title}
+            REAL CONTENT: {real_content}
+            
+            OUTPUT FORMAT: JSON {{headline, content, technique}}
+            """
         
-        REAL TITULAR: {real_title}
-        REAL CONTENT: {real_content[:1500]}
-        
-        RULES:
-        1. LANGUAGE: EXCLUSIVELY ENGLISH.
-        2. STYLE: Professional, neutral, and journalistic.
-        3. LENGTH: Similar to the original.
-        4. OUTPUT: Return a JSON with keys: headline, content, technique.
-        """
         try:
             response = self.gemini_client.models.generate_content(
                 model="gemini-2.5-flash-lite", 
@@ -61,7 +62,7 @@ class DatasetGenerator:
                 config=types.GenerateContentConfig(
                     response_mime_type="application/json",
                     response_schema=SyntheticNews,
-                    max_output_tokens=1000
+                    max_output_tokens=1500
                 ),
             )
             return response.parsed
@@ -150,6 +151,6 @@ class DatasetGenerator:
 
 if __name__ == "__main__":
     # Puedes cambiar el número aquí para controlar cada ejecución
-    GEN_GOAL = 29 
+    GEN_GOAL = 1 
     gen = DatasetGenerator()
     gen.process_pipeline(goal=GEN_GOAL)
