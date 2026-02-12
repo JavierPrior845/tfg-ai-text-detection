@@ -34,9 +34,9 @@ def deduplicate_news(input_file, output_file):
                 # Es un duplicado (mismo contenido, diferente ID)
                 duplicate_count += 1
 
-    print(f"✅ Proceso finalizado.")
-    print(f"📊 Noticias únicas guardadas: {unique_count}")
-    print(f"🗑️ Duplicados eliminados: {duplicate_count}")
+    print(f"Proceso finalizado.")
+    print(f"Noticias únicas guardadas: {unique_count}")
+    print(f"Duplicados eliminados: {duplicate_count}")
 
 if __name__ == "__main__":
     # Ajusta las rutas a tu estructura de carpetas

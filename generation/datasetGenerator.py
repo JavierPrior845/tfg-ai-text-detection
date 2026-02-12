@@ -22,9 +22,10 @@ ROOT_DIR = BASE_DIR.parent
 DATASET_ROOT = ROOT_DIR / "dataset"
 IMAGES_DIR = DATASET_ROOT / "fake_images"
 FINAL_DATASET_FILE = DATASET_ROOT / "multimodal_dataset.jsonl"
-REAL_NEWS_FILE = ROOT_DIR / "scraping" / "data_collection" / "real_news.jsonl"
+REAL_NEWS_FILE = ROOT_DIR / "scraping" / "data_collection" / "real_news_no_duplicates.jsonl"
 
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+
 
 class DatasetGenerator:
     def __init__(self):
@@ -74,18 +75,18 @@ class DatasetGenerator:
         """Genera imagen sintética y devuelve la ruta relativa para el JSONL."""
         file_name = f"{article_id}_fake.png"
         image_path = IMAGES_DIR / file_name
-        try:
-            image = self.hf_client.text_to_image(
-                prompt=f"Professional photojournalism, high quality, realistic news photo: {fake_headline}",
-                model="black-forest-labs/FLUX.1-schnell",
-            )
-            image.save(image_path)
-            # Guardamos la ruta relativa en el JSONL para portabilidad
-            return f"images/{file_name}"
-        except Exception as e:
-            print(f"Image Error: {e}")
-            return None
-
+        if not image_path.exists():
+            try:
+                image = self.hf_client.text_to_image(
+                    prompt=f"Professional photojournalism, high quality, realistic news photo: {fake_headline}",
+                    model="black-forest-labs/FLUX.1-schnell",
+                )
+                image.save(image_path)
+            except Exception as e:
+                print(f"Image Error: {e}")
+                return None
+        return f"dataset/fake_images/{file_name}"
+        
     def process_pipeline(self, goal=10):
         if not REAL_NEWS_FILE.exists():
             print(f"Source file not found: {REAL_NEWS_FILE}")
@@ -149,8 +150,97 @@ class DatasetGenerator:
 
         print(f"Finished. Generated {new_pairs_count} new pairs.")
 
+class TextOnlyGenerator(DatasetGenerator):
+    def process_pipeline(self, goal=10):
+        if not REAL_NEWS_FILE.exists():
+            print(f"Source file not found: {REAL_NEWS_FILE}")
+            return
+
+        new_pairs_count = 0
+        with open(REAL_NEWS_FILE, "r", encoding="utf-8") as f:
+            for line in f:
+                if new_pairs_count >= goal: break
+                
+                real_data = json.loads(line)
+                group_id = real_data["article_id"]
+                
+                if group_id in self.processed_ids: continue
+
+                print(f"[*] Processing text for pair {new_pairs_count + 1}/{goal}: {group_id}")
+
+                fake_text = self.generate_fake_text(real_data["title"], real_data["content"])
+                if not fake_text: continue
+
+                entry_real = {
+                    "group_id": group_id, "is_real": 1, "title": real_data["title"],
+                    "content": real_data["content"], "image_path": real_data["image_url"], "model": "human"
+                }
+
+                entry_fake = {
+                    "group_id": group_id, "is_real": 0, "title": fake_text.headline,
+                    "content": fake_text.content, "image_path": None, # Marcamos como pendiente
+                    "technique": fake_text.technique, "model": "gemini-2.0-flash-lite"
+                }
+
+                with open(FINAL_DATASET_FILE, "a", encoding="utf-8") as out:
+                    out.write(json.dumps(entry_real, ensure_ascii=False) + "\n")
+                    out.write(json.dumps(entry_fake, ensure_ascii=False) + "\n")
+                
+                self.processed_ids.add(group_id)
+                new_pairs_count += 1
+                time.sleep(1)
+
+
+class ImageBackfiller:
+    def __init__(self):
+        self.hf_client = InferenceClient(api_key=os.getenv('FIRST_HF_TK'))
+
+    def run(self):
+        temp_file = FINAL_DATASET_FILE.with_suffix(".tmp")
+        updated_count = 0
+        stop_execution = False
+
+        with open(FINAL_DATASET_FILE, "r", encoding="utf-8") as f_in, \
+            open(temp_file, "w", encoding="utf-8") as f_out:
+            
+            for line in f_in:
+                data = json.loads(line)
+                
+                # Si no hemos sido bloqueados por la API y falta la imagen
+                if not stop_execution and data["is_real"] == 0 and (data["image_path"] is None or data["image_path"] == ""):
+                    print(f"[*] Generating missing image for: {data['group_id']}")
+                    file_name = f"{data['group_id']}_fake.png"
+                    img_path = IMAGES_DIR / file_name
+                    
+                    try:
+                        if not img_path.exists():
+                            image = self.hf_client.text_to_image(
+                                prompt=f"Professional news photo: {data['title']}",
+                                model="black-forest-labs/FLUX.1-schnell",
+                            )
+                            image.save(img_path)
+                        
+                        data["image_path"] = f"dataset/fake_images/{file_name}"
+                        updated_count += 1
+                    except Exception as e:
+                        print(f"❌ Error en imagen {data['group_id']}: {e}")
+                        if "402" in str(e):
+                            print("🛑 Cuota agotada. Guardando progreso y saliendo...")
+                            stop_execution = True # Marcamos para dejar de intentar, pero seguimos copiando el resto del archivo
+                
+                f_out.write(json.dumps(data, ensure_ascii=False) + "\n")
+        
+        temp_file.replace(FINAL_DATASET_FILE)
+        print(f"✅ Proceso completado. Imágenes añadidas: {updated_count}")
+
 if __name__ == "__main__":
     # Puedes cambiar el número aquí para controlar cada ejecución
-    GEN_GOAL = 1 
-    gen = DatasetGenerator()
+    GEN_GOAL = 55
+    #gen = DatasetGenerator()
+    #gen.process_pipeline(goal=GEN_GOAL)
+
+    gen = TextOnlyGenerator()
     gen.process_pipeline(goal=GEN_GOAL)
+
+    #filler = ImageBackfiller()
+    #filler.run()
