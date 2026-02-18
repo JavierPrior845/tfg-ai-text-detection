@@ -4,6 +4,7 @@ from collections import Counter
 from pathlib import Path
 import pandas as pd
 
+
 def analyze_artifacts(file_path):
     real_chars = Counter()
     ai_chars = Counter()
