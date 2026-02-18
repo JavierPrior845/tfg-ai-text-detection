@@ -11,9 +11,9 @@ load_dotenv()
 # Configuración de rutas absoluta para evitar líos de directorios
 SCRIPT_DIR = Path(__file__).resolve().parent
 TOKEN_FILE = SCRIPT_DIR / "last_token.txt"
-OUTPUT_FILE = SCRIPT_DIR / "real_news.jsonl"
+OUTPUT_FILE = SCRIPT_DIR / "pending_real_news.jsonl"
 
-categories = ["environment", "top", "business", "technology", "science", "politics"]
+categories = ["top", "business", "technology", "science", "politics", "environment"]
 
 def get_last_token():
     if TOKEN_FILE.exists():

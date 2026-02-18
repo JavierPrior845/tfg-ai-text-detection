@@ -22,7 +22,7 @@ ROOT_DIR = BASE_DIR.parent
 DATASET_ROOT = ROOT_DIR / "dataset"
 IMAGES_DIR = DATASET_ROOT / "fake_images"
 FINAL_DATASET_FILE = DATASET_ROOT / "multimodal_dataset.jsonl"
-REAL_NEWS_FILE = ROOT_DIR / "scraping" / "data_collection" / "real_news_no_duplicates.jsonl"
+REAL_NEWS_FILE = ROOT_DIR / "scraping" / "data_collection" / "pending_real_news.jsonl"
 
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -42,12 +42,16 @@ class DatasetGenerator:
             return {json.loads(line)["group_id"] for line in f}
 
     def generate_fake_text(self, real_title, real_content):
+        words = real_content.split()
+        if len(words) > 800:
+            real_content = " ".join(words[:800])
         
         target_words = len(real_content.split())
+
         prompt = f"""
             [CRITICAL INSTRUCTION]
             You must paraphrase the following news article. 
-            The generated content MUST HAVE between {int(target_words*0.9)} and {int(target_words*1.1)} words.
+            The generated content MUST HAVE between {int(target_words*0.9)} and {int(target_words)} words.
             Do not be concise. Mimic the original news length and detail density.
 
             REAL TITULAR: {real_title}
@@ -66,6 +70,14 @@ class DatasetGenerator:
                     max_output_tokens=1500
                 ),
             )
+
+            if response.parsed is None:
+                # ESTO ES LO QUE ESTÁ PASANDO POSIBLEMENTE
+                print(f"⚠️ Error de formato o seguridad para: {real_title[:30]}")
+                # Si quieres ver el motivo real de seguridad:
+                if response.candidates[0].finish_reason:
+                    print(f"   Motivo: {response.candidates[0].finish_reason}")
+                    
             return response.parsed
         except Exception as e:
             print(f"LLM Error: {e}")
@@ -188,7 +200,7 @@ class TextOnlyGenerator(DatasetGenerator):
                 
                 self.processed_ids.add(group_id)
                 new_pairs_count += 1
-                time.sleep(1)
+                time.sleep(2)
 
 
 class ImageBackfiller:
@@ -235,7 +247,7 @@ class ImageBackfiller:
 
 if __name__ == "__main__":
     # Puedes cambiar el número aquí para controlar cada ejecución
-    GEN_GOAL = 55
+    GEN_GOAL = 100
     #gen = DatasetGenerator()
     #gen.process_pipeline(goal=GEN_GOAL)
 

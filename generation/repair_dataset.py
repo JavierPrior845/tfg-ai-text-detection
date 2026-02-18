@@ -33,4 +33,4 @@ def repair_dataset(file_path):
     print(f"✅ Reparación finalizada. {len(repaired_lines)} líneas rescatadas.")
 
 if __name__ == "__main__":
-    repair_dataset("dataset/multimodal_dataset.jsonl")
+    repair_dataset("dataset/multimodal_dataset_fixed.jsonl")
