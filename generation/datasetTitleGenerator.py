@@ -55,7 +55,7 @@ class TitleGenerator:
         The headline MUST HAVE a length of approximately {self.avg_title_length} words.
         Maintain a professional journalistic tone.
 
-        CONTENT: {content[:4000]}  # Limitamos entrada para ahorrar tokens
+        CONTENT: {content[:4000]}
         
         OUTPUT FORMAT: JSON {{headline}}
         """
@@ -71,7 +71,7 @@ class TitleGenerator:
             )
             return response.parsed.headline if response.parsed else None
         except Exception as e:
-            print(f"❌ Error API: {e}")
+            print(f"Error API: {e}")
             return None
 
     def run(self, limit=None):
