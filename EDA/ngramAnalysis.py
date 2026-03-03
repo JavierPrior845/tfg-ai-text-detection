@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import json
 from sklearn.feature_extraction.text import CountVectorizer
@@ -25,16 +26,42 @@ def analyze_ngram_comparison(path, n=2, top_k=15):
     real_top = get_top_ngrams(real_titles)
     ai_top = get_top_ngrams(ai_titles)
     
-    # 4. Visualización
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
+    # 4. Visualización Pro
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
     
-    sns.barplot(x=[x[1] for x in real_top], y=[x[0] for x in real_top], ax=ax1, palette='Blues_r')
-    ax1.set_title(f'Top {n}-gramas Reales')
-    
-    sns.barplot(x=[x[1] for x in ai_top], y=[x[0] for x in ai_top], ax=ax2, palette='Oranges_r')
-    ax2.set_title(f'Top {n}-gramas Gemini (AI)')
-    
+    # Gráfico para noticias Reales
+    sns.barplot(
+        x=[x[1] for x in real_top], 
+        y=[x[0] for x in real_top], 
+        ax=ax1, 
+        palette='Blues_r',
+        hue=[x[0] for x in real_top],  # Corregido: Asignamos hue
+        legend=False                  # Corregido: Quitamos leyenda innecesaria
+    )
+    ax1.set_title(f'Top {n}-gramas: Noticias Reales (NewsData)', fontsize=14)
+    ax1.set_xlabel('Frecuencia Absoluta')
+
+    # Gráfico para noticias AI
+    sns.barplot(
+        x=[x[1] for x in ai_top], 
+        y=[x[0] for x in ai_top], 
+        ax=ax2, 
+        palette='Oranges_r',
+        hue=[x[0] for x in ai_top],   # Corregido: Asignamos hue
+        legend=False                  # Corregido: Quitamos leyenda innecesaria
+    )
+    ax2.set_title(f'Top {n}-gramas: Titulares Gemini (AI)', fontsize=14)
+    ax2.set_xlabel('Frecuencia Absoluta')
+
     plt.tight_layout()
-    plt.show()
+    
+    # 5. Guardado automático para la memoria del TFG
+    output_img = f"EDA/plots/ngram_{n}_comparison.png"
+    os.makedirs("EDA/plots", exist_ok=True)
+    plt.savefig(output_img, dpi=300) # Alta resolución para impresión
+    print(f"[*] Análisis completado. Gráfico guardado en: {output_img}")
 
 # Uso: analyze_ngram_comparison("dataset/titles_data.jsonl", n=2)
+
+if __name__ == "__main__":
+    analyze_ngram_comparison("dataset/titles_data.jsonl", n=1)
