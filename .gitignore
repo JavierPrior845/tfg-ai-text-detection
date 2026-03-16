@@ -7,7 +7,6 @@ venv/
 *.csv
 .env
 venv/
-doc.md
 assets/*
 dataset/
 last_token.txt
